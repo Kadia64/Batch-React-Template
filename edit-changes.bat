@@ -18,14 +18,13 @@ IF "%~1"=="" (
     goto:EOF
 
 ) ELSE (
-    :: else get the parameters from create-react-template.bat
     SET REPO_NAME=%~1
 )
 
 SET DEV_BRANCH=staging
 SET HOST_BRANCH=deployment
-SET USERNAME=Kadia64
 SET EDITING_DIR=C:\Users\wesgl\OneDrive\Desktop\git testing REACT\Batch Testing\Batch\Edit
+SET /P USERNAME="Github Username: "
 SET /P TOKEN="Github Personal Access Token: "
 SET GIT_REPO=https://%TOKEN%@github.com/%USERNAME%/%REPO_NAME%.git
 
@@ -75,8 +74,6 @@ echo %BLUE%Pushing to host branch:%RESET%
 CALL git add .
 CALL git commit -m "Updated the deploy code"
 CALL git push origin %HOST_BRANCH%
-
-::CALL git checkout %DEV_BRANCH%
 
 echo %GREEN%Successfully upated your github repoistory!%RESET%
 
