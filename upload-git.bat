@@ -23,16 +23,18 @@ IF "%~1"=="" (
 FOR /F "tokens=* USEBACKQ" %%F IN (`cd`) DO (
     SET BATCH_DIR=%%F
 )
+SET /P USERNAME="Github Username: "
 SET /P TOKEN="Github Personal Access Token: "
-SET USERNAME=Kadia64
 SET CREATE_DIR=C:\Users\wesgl\OneDrive\Desktop\git testing REACT\Batch Testing\Batch\Create\
 SET BUILD_APP_DIR=%CREATE_DIR%\%APP_NAME%
 SET REPO_URL=https://%TOKEN%@github.com/%USERNAME%/%REPO_NAME%.git
 
-:: check if create directory exists
+:: IMPORTANT, check if create directory exists
 cd %BUILD_APP_DIR%
-echo %RED%Are you sure you want to continue%RESET%
-echo %BUILD_APP_DIR%
+echo %RED%Are you sure you want to continue, this script will attempt to delete files and folders pointed at this directory:%RESET%
+echo.
+echo %RED%%BUILD_APP_DIR%%RESET%
+echo.
 pause
 
 CALL git init
