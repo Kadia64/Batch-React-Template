@@ -30,8 +30,6 @@ echo.
 echo Please use all lowercase letters with no spaces
 SET /P APP_NAME="Application Name: "
 
-
-:: somehow check if the github repo already exists, or have ai do that
 echo.
 echo Non-case-sensitive, no spaces
 SET /P REPO_NAME="Github Repository Name: "
@@ -64,7 +62,6 @@ CALL npm install -D tailwindcss@3 postcss autoprefixer
 echo.
 echo %BLUE%--- creating tailwind config file ---%RESET%
 CALL npx tailwindcss init
-
 
 :: COPY AND PASTE FROM TEMPLATES
 
@@ -108,8 +105,14 @@ pause
 echo %GREEN%~~~building your project~~~%RESET%
 CALL npm run build
 
+SET /P CREATE_REPO="Create New Github Repo? [Y/N]: "
+
 cd %BATCH_DIR%
-CALL upload-git.bat "%REPO_NAME%" "%APP_NAME%"
+IF /I "%CREATE_REPO%"=="Y" (
+    CALL upload-git.bat "%REPO_NAME%" "%APP_NAME%"
+) ELSE (
+    echo exiting...
+)
 
 cd %BATCH_DIR%
 
